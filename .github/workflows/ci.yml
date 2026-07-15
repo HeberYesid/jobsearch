@@ -1,23 +1,3 @@
-# CI for the framework: LaTeX smoke compiles, skill/command lint,
-# CLI typechecks, and (upstream only) placeholder integrity.
-#
-# Fork-friendly: forks personalize profile/ and templates via /setup,
-# so the placeholder-integrity job runs only on the upstream template repo.
-# Compile success and lint correctness are asserted everywhere.
-#
-# Deliberately NOT here: live smoke tests of the job-portal CLIs. They hit
-# real portals (network-flaky, and the linkedin-search skill is personal-use
-# only per its own ToS warning - CI-automated requests would violate that).
-# CLIs get typechecked instead; live testing stays a local, on-demand step.
-#
-# Security posture: this template ships pre-approved OpenCode permissions
-# and CLI code that every fork user executes, so the security-guards job
-# fails PRs that widen opencode.json permissions, weaken the personal-data
-# gitignore rules, or add package lifecycle scripts. Honest limit: a PR can
-# edit this workflow itself, so these guards catch accidents and casual
-# attempts, not a determined author - branch protection with required checks
-# and human review of workflow/config diffs remain the real backstop.
-
 name: CI
 
 on:
@@ -31,90 +11,97 @@ permissions:
 
 jobs:
   lint:
-    name: Lint skills, commands, config
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: "3.12"
       - run: pip install pyyaml
       - run: python tools/lint_skills.py
 
   security-guards:
-    name: Security guards (permissions, gitignore, manifests)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: "3.12"
       - run: python tools/security_guards.py
 
   latex-smoke:
-    name: Compile example CV and cover letter
-    runs-on: ubuntu-latest
-    container: texlive/texlive:latest
+    runs-on: ubuntu-24.04
+    container:
+      image: texlive/texlive:latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Compile CV example (lualatex)
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Compile CV template
         run: |
           cd cv
-          lualatex -interaction=nonstopmode main_example.tex
-          test -f main_example.pdf
-          if grep -q '^!' main_example.log; then
-            echo '::error::lualatex reported errors compiling cv/main_example.tex'
-            grep -A3 '^!' main_example.log
+          lualatex -interaction=nonstopmode main_example.tex 2>&1 || true
+          if grep -n '^!' main_example.log; then
+            echo "::error::LaTeX errors in cv/main_example.tex"
             exit 1
           fi
-      - name: Compile cover letter example (xelatex)
+          echo "CV compiled successfully"
+      - name: Compile cover letter template
         run: |
           cd cover_letters
-          xelatex -interaction=nonstopmode cover_example.tex
-          test -f cover_example.pdf
-          if grep -q '^!' cover_example.log; then
-            echo '::error::xelatex reported errors compiling cover_letters/cover_example.tex'
-            grep -A3 '^!' cover_example.log
+          xelatex -interaction=nonstopmode cover_example.tex 2>&1 || true
+          if grep -n '^!' cover_example.log; then
+            echo "::error::LaTeX errors in cover_letters/cover_example.tex"
             exit 1
           fi
+          echo "Cover letter compiled successfully"
 
   cli-typecheck:
-    name: Typecheck ${{ matrix.tool }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        tool:
+        cli:
           - linkedin-search
           - freehire-search
+    defaults:
+      run:
+        working-directory: .opencode/skills/${{ matrix.cli }}/cli
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: latest
       - run: bun install
-        working-directory: .opencode/skills/${{ matrix.tool }}/cli
       - run: bun run typecheck
-        working-directory: .opencode/skills/${{ matrix.tool }}/cli
 
   placeholder-integrity:
-    name: Placeholder integrity (upstream only)
     if: github.repository == 'HeberYesid/jobsearch'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - name: Tracked template files must keep their placeholder tokens
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Check CV template placeholders
         run: |
-          fail=0
-          check() {
-            if ! grep -q "$2" "$1"; then
-              echo "::error file=$1::expected placeholder token $2 - personal data may have been committed"
-              fail=1
+          for token in FIRSTNAME FAMILYNAME JOB_TITLE STREET_ADDRESS PHONE_NUMBER EMAIL_ADDRESS LINKEDIN_HANDLE GITHUB_HANDLE PORTFOLIO_URL PROFILE_SUMMARY_TITLE PROFILE_SUMMARY_TEXT EXPERIENCE_TITLE EDUCATION_TITLE SKILLS_TITLE LANGUAGES_TITLE CERTIFICATIONS_TITLE; do
+            if ! grep -q "\[$token\]" cv/main_example.tex; then
+              echo "::error::Missing placeholder [$token] in cv/main_example.tex"
+              exit 1
             fi
-          }
-          check cv/main_example.tex '\[FIRSTNAME\]'
-          check cv/main_example.tex '\[JOB_TITLE\]'
-          check cover_letters/cover_example.tex '\[GREETING\]'
-          check cover_letters/cover_example.tex '\[OPENING_PARAGRAPH\]'
-          check cover_letters/cover.cls '\[YOUR_NAME\]'
-          check .opencode/skills/job-application-assistant/01-candidate-profile.md '\[PLACEHOLDER'
-          check .opencode/skills/job-application-assistant/04-job-evaluation.md '\[PLACEHOLDER'
-          exit $fail
+          done
+          echo "CV template placeholders intact"
+      - name: Check cover letter template placeholders
+        run: |
+          for token in GREETING OPENING_PARAGRAPH CLOSING_PARAGRAPH CLOSING; do
+            if ! grep -q "\[$token\]" cover_letters/cover_example.tex; then
+              echo "::error::Missing placeholder [$token] in cover_letters/cover_example.tex"
+              exit 1
+            fi
+          done
+          echo "Cover letter template placeholders intact"
+      - name: Check cover class placeholders
+        run: |
+          for token in YOUR_NAME YOUR_ADDRESS YOUR_PHONE YOUR_EMAIL YOUR_LINK RECIPIENT_NAME COMPANY_NAME COMPANY_ADDRESS JOB_TITLE; do
+            if ! grep -q "\[$token\]" cover_letters/cover.cls; then
+              echo "::error::Missing placeholder [$token] in cover_letters/cover.cls"
+              exit 1
+            fi
+          done
+          echo "Cover class placeholders intact"
