@@ -1,0 +1,44 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "skill": {
+      "*": "allow"
+    },
+    "bash": {
+      "*": "ask",
+      "git status *": "allow",
+      "git diff *": "allow",
+      "git log *": "allow",
+      "git show *": "allow",
+      "git add *": "allow",
+      "git commit *": "ask",
+      "git push *": "ask",
+      "lualatex *": "allow",
+      "xelatex *": "allow",
+      "pdflatex *": "allow",
+      "pdftotext *": "allow",
+      "python *": "allow",
+      "python3 *": "allow",
+      "bun *": "allow",
+      "node *": "allow",
+      "npx *": "allow",
+      "choco *": "allow",
+      "openspec *": "allow",
+      "mkdir *": "allow",
+      "Test-Path *": "allow",
+      "Get-ChildItem *": "allow",
+      "Get-Content *": "allow",
+      "New-Item *": "allow",
+      "Remove-Item *": "ask"
+    },
+    "edit": "allow",
+    "webfetch": "allow",
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "task": {
+      "*": "allow"
+    }
+  }
+}

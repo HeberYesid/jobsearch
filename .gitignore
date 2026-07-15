@@ -1,0 +1,58 @@
+# Profile — personal data, never commit
+profile/
+
+# Source documents — user materials for /setup Path A
+documents/cv/*
+documents/linkedin/*
+documents/diplomas/*
+documents/references/*
+documents/applications/*
+!documents/**/.gitkeep
+
+# Scraper state
+job_scraper/*
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.bcf
+*.run.xml
+
+# Output PDFs (templates are .tex, generated PDFs ignored)
+cv/*.pdf
+cover_letters/*.pdf
+
+# Node / Bun
+node_modules/
+bun.lockb
+.opencode/skills/*/cli/node_modules/
+.opencode/skills/*/cli/bun.lockb
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temp
+*.tmp
+*.bak
