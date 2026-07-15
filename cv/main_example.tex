@@ -1,0 +1,64 @@
+\documentclass[11pt,a4paper]{moderncv}
+
+% ----- style & color -----
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+% ----- fonts (lualatex, fallback-safe) -----
+\usepackage{fontspec}
+\IfFontExistsTF{Lato}{\setsansfont{Lato}}{}
+\IfFontExistsTF{Raleway}{\setsansfont{Raleway}}{}
+
+% ----- layout -----
+\usepackage[scale=0.75,top=0.6cm,bottom=0.6cm]{geometry}
+\setlength{\hintscolumnwidth}{3cm}
+
+% allow underscores in text (placeholders and real data like GitHub handles)
+\catcode`\_=12
+
+% ----- personal data -----
+\firstname{[FIRSTNAME]}
+\familyname{[FAMILYNAME]}
+\title{[JOB_TITLE]}
+\address{[STREET_ADDRESS]}{[CITY, COUNTRY]}
+\mobile{[PHONE_NUMBER]}
+\email{[EMAIL_ADDRESS]}
+\social[linkedin]{[LINKEDIN_HANDLE]}
+\social[github]{[GITHUB_HANDLE]}
+\homepage{[PORTFOLIO_URL]}
+
+\begin{document}
+\makecvtitle
+
+% ----- profile summary -----
+\section{[PROFILE_SUMMARY_TITLE]}
+\cvline{}{[PROFILE_SUMMARY_TEXT]}
+
+% ----- experience -----
+\section{[EXPERIENCE_TITLE]}
+\cventry{[DATES_1]}{[JOB_TITLE_1]}{[COMPANY_1]}{[CITY_1]}{}{[DESCRIPTION_1]}
+\cventry{[DATES_2]}{[JOB_TITLE_2]}{[COMPANY_2]}{[CITY_2]}{}{[DESCRIPTION_2]}
+\cventry{[DATES_3]}{[JOB_TITLE_3]}{[COMPANY_3]}{[CITY_3]}{}{[DESCRIPTION_3]}
+
+% ----- education -----
+\section{[EDUCATION_TITLE]}
+\cventry{[DATES_EDU_1]}{[DEGREE_1]}{[INSTITUTION_1]}{[CITY_EDU_1]}{[[GRADE_1]]}{[DESCRIPTION_EDU_1]}
+\cventry{[DATES_EDU_2]}{[DEGREE_2]}{[INSTITUTION_2]}{[CITY_EDU_2]}{[GRADE_2]}{[DESCRIPTION_EDU_2]}
+
+% ----- skills -----
+\section{[SKILLS_TITLE]}
+\cvitem{[SKILL_CATEGORY_1]}{[SKILL_LIST_1]}
+\cvitem{[SKILL_CATEGORY_2]}{[SKILL_LIST_2]}
+\cvitem{[SKILL_CATEGORY_3]}{[SKILL_LIST_3]}
+
+% ----- languages -----
+\section{[LANGUAGES_TITLE]}
+\cvlanguage{[LANGUAGE_1]}{[LEVEL_1]}{[LANGUAGE_2]}{[LEVEL_2]}
+\cvlanguage{[LANGUAGE_3]}{[LEVEL_3]}{}
+
+% ----- certifications -----
+\section{[CERTIFICATIONS_TITLE]}
+\cvline{[CERT_DATE_1]}{[CERT_NAME_1] -- [ISSUER_1]}
+\cvline{[CERT_DATE_2]}{[CERT_NAME_2] -- [ISSUER_2]}
+
+\end{document}

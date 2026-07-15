@@ -1,0 +1,71 @@
+\documentclass[11pt,a4paper]{moderncv}
+
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Lato}{\setsansfont{Lato}}{}
+\IfFontExistsTF{Raleway}{\setsansfont{Raleway}}{}
+
+\usepackage[scale=0.75,top=0.6cm,bottom=0.6cm]{geometry}
+\setlength{\hintscolumnwidth}{3cm}
+
+\catcode`\_=12
+
+\firstname{Heber Yesid}
+\familyname{Daza Toloza}
+\title{Mid Level Python Developer}
+\address{}{Colombia}
+\mobile{(+57) 313 3331900}
+\email{heberyesiddazatoloza@gmail.com}
+\social[linkedin]{heberdaza}
+\social[github]{heberdaza}
+\homepage{heberdaza.dev}
+
+\begin{document}
+\makecvtitle
+
+\section{Professional Summary}
+\cvline{}{Backend developer with experience in Python (FastAPI, Django), SQL, and cloud platforms. Built APIs, custom libraries, and backend services with strong software development practices including version control and testing. Seeking to contribute to CI\&T's AI-native execution team as a Mid Level Python Developer.}
+
+\section{Experience}
+
+\cventry{Jun 2024 -- Feb 2025}{Systems Assistant}{[Employer]}{Colombia}{}{%
+Developed and maintained web applications and backend services using Python. Provided technical support and maintained cloud storage infrastructure. Documented technical information and shared knowledge with cross-functional teams.
+}
+
+\cventry{2024 -- 2025}{Code Duel -- Competitive Programming Platform}{Personal Project}{}{}{%
+Built a real-time platform with a modular Python backend and isolated runtime layer using Docker containers. Implemented WebSocket infrastructure with STOMP/JWT authentication, a matchmaking queue, and a dueling state machine. Applied software design patterns and structured the codebase for maintainability and testing.
+}
+
+\cventry{2024}{AulaAlDia -- Intelligent Academic Management}{Personal Project}{}{}{%
+Developed a full-stack application integrating AI tools for automatic grade calculation and predictive analytics. Built REST APIs and designed PostgreSQL schemas. Applied version control and iterative development practices throughout the project lifecycle.
+}
+
+\cventry{2024}{Concurrent Scheduler -- Process Simulator}{Personal Project}{}{}{%
+Designed a process scheduling system with dynamic prioritization and aging. Optimized task selection to O(log n) complexity using multilevel priority queues. Validated correctness with jqwik property tests and JMH benchmarks.
+}
+
+\section{Education}
+\cventry{2022 -- Present}{Systems Engineering}{University of Santander}{Colombia}{8th Semester (In Progress)}{}
+
+\section{Skills}
+\cvitem{Languages \& Frameworks}{Python (FastAPI, Django, pydantic, SQLAlchemy), Java (Spring Boot)}
+\cvitem{Databases}{PostgreSQL, MySQL}
+\cvitem{Cloud \& DevOps}{AWS, Google Cloud, Docker, CI/CD, Git, GitHub}
+\cvitem{APIs \& Security}{REST APIs, JWT, WebSocket (STOMP)}
+\cvitem{AI Tools}{Claude Code, Codex -- Skills, MCP, prompt engineering}
+\cvitem{Methodologies}{Agile (Scrum), Jira}
+\cvitem{Engineering}{SOLID, OOP, design patterns, data structures, version control}
+
+\section{Languages}
+\cvlanguage{Spanish}{Native}{}
+\cvlanguage{English}{Conversational}{Technical communication -- English for IT 1 \& 2 (Cisco)}
+
+\section{Certifications}
+\cvline{2024}{Python Essentials I \& II -- Cisco Networking Academy}
+\cvline{2024}{Advanced Programming Bootcamp -- Talento Tech Colombia}
+\cvline{2024}{Exploratory Data Analysis in Python -- SENA}
+\cvline{2024}{English for IT 1 \& 2 -- Cisco Networking Academy}
+
+\end{document}

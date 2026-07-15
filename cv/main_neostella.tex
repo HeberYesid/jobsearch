@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper]{moderncv}
+
+% ----- style & color -----
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+% ----- fonts (lualatex, fallback-safe) -----
+\usepackage{fontspec}
+\IfFontExistsTF{Lato}{\setsansfont{Lato}}{}
+\IfFontExistsTF{Raleway}{\setsansfont{Raleway}}{}
+
+% ----- layout -----
+\usepackage[scale=0.75,top=0.6cm,bottom=0.6cm]{geometry}
+\setlength{\hintscolumnwidth}{3cm}
+
+% allow underscores in text
+\catcode`\_=12
+
+% ----- personal data -----
+\firstname{Heber Yesid}
+\familyname{Daza Toloza}
+\title{Python Developer}
+\address{}{Colombia}
+\mobile{(+57) 313 3331900}
+\email{heberyesiddazatoloza@gmail.com}
+\social[linkedin]{heberdaza}
+\social[github]{heberdaza}
+\homepage{heberdaza.dev}
+
+\begin{document}
+\makecvtitle
+
+% ----- profile summary -----
+\section{Professional Summary}
+\cvline{}{Backend developer with experience in Python (Django, FastAPI), REST API integrations, and AWS cloud services. Built production-grade systems with containerized runtimes, WebSocket communication, and CI/CD pipelines. Strong foundation in OOP, SOLID principles, and event-driven architectures. Skilled in AI-assisted development to accelerate delivery and improve code quality. Seeking to contribute to Neostella's integration platform as a Python Developer.}
+
+% ----- experience -----
+\section{Experience}
+
+\cventry{Jun 2024 -- Feb 2025}{Systems Assistant}{[Employer]}{Colombia}{}{%
+Developed and maintained web applications and backend services using Python. Maintained cloud storage infrastructure and enforced information security protocols. Produced technical documentation and collaborated with cross-functional teams. Applied coding standards and version control workflows across the development lifecycle.
+}
+
+\cventry{2024 -- 2025}{Code Duel -- Competitive Programming Platform}{Personal Project}{}{}{%
+Built a real-time coding challenge platform with a modular Python backend and isolated runtime layer using Docker containers. Implemented WebSocket infrastructure with STOMP/JWT authentication, matchmaking queue, and a dueling state machine. Integrated Monaco Editor for in-browser code execution.
+}
+
+\cventry{2024}{AulaAlDia -- Intelligent Academic Management}{Personal Project}{}{}{%
+Developed a full-stack school management application with integrated AI tools. Built REST APIs for automatic grade calculation, predictive analytics, and a visual alert system.
+}
+
+\cventry{2024}{Concurrent Scheduler -- Process Simulator}{Personal Project}{}{}{%
+Designed a process scheduling system with dynamic prioritization and aging. Optimized task selection to O(log n) complexity using multilevel priority queues. Validated correctness with jqwik property tests and JMH benchmarks.
+}
+
+% ----- education -----
+\section{Education}
+\cventry{2022 -- Present}{Systems Engineering}{University of Santander}{Colombia}{8th Semester (In Progress)}{}
+
+% ----- skills -----
+\section{Skills}
+\cvitem{Languages \& Frameworks}{Python (Django, FastAPI), Java (Spring Boot)}
+\cvitem{APIs \& Security}{REST APIs, JWT, WebSocket (STOMP)}
+\cvitem{Cloud \& DevOps}{AWS, Google Cloud, Docker, CI/CD, Git, GitHub, Integration Testing}
+\cvitem{AI Tools}{Claude Code, Codex -- Skills, MCP, prompt engineering, harness engineering}
+\cvitem{Databases}{PostgreSQL, MySQL}
+\cvitem{Methodologies}{Agile (Scrum), Jira, Trello}
+\cvitem{Engineering Fundamentals}{SOLID, OOP, design patterns, data structures, algorithms}
+
+% ----- languages -----
+\section{Languages}
+\cvlanguage{Spanish}{Native}{}
+\cvlanguage{English}{Conversational}{Technical communication -- English for IT 1 \& 2 (Cisco)}
+
+% ----- certifications -----
+\section{Certifications}
+\cvline{2024}{Python Essentials I \& II -- Cisco Networking Academy}
+\cvline{2024}{Advanced Programming Bootcamp -- Talento Tech Colombia}
+\cvline{2024}{English for IT 1 \& 2 -- Cisco Networking Academy}
+\cvline{2023}{JavaScript Essentials 1 -- Cisco Networking Academy}
+
+\end{document}

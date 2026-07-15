@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper]{moderncv}
+
+% ----- style & color -----
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+% ----- fonts (lualatex, fallback-safe) -----
+\usepackage{fontspec}
+\IfFontExistsTF{Lato}{\setsansfont{Lato}}{}
+\IfFontExistsTF{Raleway}{\setsansfont{Raleway}}{}
+
+% ----- layout -----
+\usepackage[scale=0.75,top=0.6cm,bottom=0.6cm]{geometry}
+\setlength{\hintscolumnwidth}{3cm}
+
+% allow underscores in text
+\catcode`\_=12
+
+% ----- personal data -----
+\firstname{Heber Yesid}
+\familyname{Daza Toloza}
+\title{Backend Software Engineer}
+\address{}{Colombia}
+\mobile{(+57) 313 3331900}
+\email{heberyesiddazatoloza@gmail.com}
+\social[linkedin]{heberdaza}
+\social[github]{heberdaza}
+\homepage{heberdaza.dev}
+
+\begin{document}
+\makecvtitle
+
+% ----- profile summary -----
+\section{Professional Summary}
+\cvline{}{Backend developer with experience in Python, Java, REST API design, and relational databases. Built scalable systems using Docker, CI/CD pipelines, and cloud services. Strong foundation in OOP, data structures, and software design patterns. Experience with microservice decomposition, message-driven communication, and containerized runtimes. Seeking to contribute to Grip's logistics platform as a Backend Software Engineer.}
+
+% ----- experience -----
+\section{Experience}
+
+\cventry{Jun 2024 -- Feb 2025}{Systems Assistant}{[Employer]}{Colombia}{}{%
+Developed and maintained web applications and backend services using Python. Provided technical support, maintained cloud storage infrastructure, and enforced information security protocols. Produced technical documentation and collaborated with cross-functional teams.
+}
+
+\cventry{2024 -- 2025}{Code Duel -- Competitive Programming Platform}{Personal Project}{}{}{%
+Built a real-time coding challenge platform with a modular Python backend and isolated runtime layer using Docker containers. Implemented WebSocket infrastructure with STOMP/JWT authentication, a matchmaking queue, and a dueling state machine --- demonstrating microservice decomposition, message-driven communication, and API design patterns applicable to distributed backend systems.
+}
+
+\cventry{2024}{Concurrent Scheduler -- Process Simulator}{Personal Project}{}{}{%
+Designed a process scheduling system with dynamic prioritization and aging. Optimized task selection to O(log n) complexity using multilevel priority queues. Validated correctness with jqwik property tests and JMH benchmarks --- applying TDD-adjacent testing practices to ensure system reliability.
+}
+
+\cventry{2024}{AulaAlDia -- Intelligent Academic Management}{Personal Project}{}{}{%
+Developed a full-stack school management application with integrated AI tools. Built REST APIs for automatic grade calculation, predictive analytics, and a visual alert system. Designed relational database schemas in PostgreSQL for academic data management.
+}
+
+% ----- education -----
+\section{Education}
+\cventry{2022 -- Present}{Systems Engineering}{University of Santander}{Colombia}{8th Semester (In Progress)}{}
+
+% ----- skills -----
+\section{Skills}
+\cvitem{Languages \& Frameworks}{Python (Django, FastAPI), Java (Spring Boot)}
+\cvitem{Databases}{PostgreSQL, MySQL, MongoDB, Redis}
+\cvitem{APIs \& Communication}{REST APIs, WebSocket (STOMP), JWT}
+\cvitem{Cloud \& DevOps}{AWS, Google Cloud, Docker, CI/CD, Git, GitHub}
+\cvitem{AI Tools}{Claude Code, Codex -- Skills, MCP, prompt engineering}
+\cvitem{Methodologies}{Agile (Scrum), Jira, Trello}
+\cvitem{Engineering}{SOLID, design patterns, data structures, algorithms, microservices}
+
+% ----- languages -----
+\section{Languages}
+\cvlanguage{Spanish}{Native}{}
+\cvlanguage{English}{Conversational}{Technical communication -- English for IT 1 \& 2 (Cisco)}
+
+% ----- certifications -----
+\section{Certifications}
+\cvline{2024}{Python Essentials I \& II -- Cisco Networking Academy}
+\cvline{2024}{Advanced Programming Bootcamp -- Talento Tech Colombia}
+\cvline{2024}{English for IT 1 \& 2 -- Cisco Networking Academy}
+
+\end{document}
